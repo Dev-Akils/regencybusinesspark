@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@keyframes blink {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+/* .road-dot {
+  animation: blink 1s infinite;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+
+@keyframes pulse {
+  0% {
+    r: 30;
+    opacity: 0.3;
+  }
+  33% {
+    r: 50;
+    opacity: 0.6;
+  }
+  66% {
+    r: 70;
+    opacity: 0.3;
+  }
+  100% {
+    r: 30;
+    opacity: 0.3;
+  }
+}
+
+.pulse-dot {
+  animation: pulse 2s infinite;
+  transition: r 0.3s ease, opacity 0.3s ease;
+} */
+
+/* Inner blinking dot */
+@keyframes blink {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+.road-dot {
+  animation: blink 1s infinite;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+/* Outer pulsing dot */
+@keyframes pulse {
+  0% { r: 20; opacity: 0.3; }
+  50% { r: 40; opacity: 0.6; }
+  100% { r: 20; opacity: 0.3; }
+}
+.pulse-dot {
+  animation: pulse 2s infinite;
+  pointer-events: none; /* so mouse events go to inner dot */
+}
