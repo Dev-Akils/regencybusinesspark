@@ -46,7 +46,7 @@ export const masterPlan: MasterPlan[] = [
             { id: 1, polygonPoints: "1330,412,1356,394,1372,399,1393,420,1393,447,1359,497,1327,444", link: "https://panoraven.com/en/embed/JzbOBHd2EP" },  //5
             { id: 2, polygonPoints: "1810,628,1836,610,1852,615,1873,636,1873,663,1839,713,1807,660", link: "https://panoraven.com/en/embed/IzRh7AgWjK" },  //4
             { id: 3, polygonPoints: "2374,860,2400,842,2416,847,2437,868,2437,895,2403,945,2371,892", link: "https://panoraven.com/en/embed/BhekkdUMPg" },  //3
-            { id: 4, polygonPoints: "2244,1001,2270,983,2286,988,2307,1009,2307,1036,2273,1086,2241,1033", link: "https://panoraven.com/en/embed/f3bc570by7" }, //2
+            { id: 4, polygonPoints: "2301,1018,2288,978,2243,976,2229,1002,2232,1029,2261,1082", link: "https://panoraven.com/en/embed/f3bc570by7" }, //2
             { id: 5, polygonPoints: "1265,527,1291,509,1307,514,1328,535,1328,562,1294,612,1262,559", link: "https://panoraven.com/en/embed/UHkcEZiOFr" },  //1
             { id: 6, polygonPoints: "1896,519,1922,501,1938,506,1959,527,1959,554,1925,604,1893,551", link: "https://panoraven.com/en/embed/LLLmd3NML9" },  //ex1
             { id: 7, polygonPoints: "1650,865,1676,847,1692,852,1713,873,1713,900,1679,950,1647,897", link: "https://panoraven.com/en/embed/GTMaj0X0VR" },  //ex3

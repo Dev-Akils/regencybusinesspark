@@ -9,6 +9,7 @@ export default function MasterPlanPage() {
     const [zoomOpen, setZoomOpen] = useState(false);
     const [selectedFloor, setSelectedFloor] = useState<number | null>(null);
     const [hoveredFloor, setHoveredFloor] = useState<number | null>(null);
+    const [hoveredLink,setHoveredLink]=useState<number | null>(null);
 
     // Track which masterPlan is active
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -67,38 +68,15 @@ export default function MasterPlanPage() {
 
             {/* Floor Plan */}
             <div className="relative w-full md:h-screen flex items-center justify-center">
-                {/* link integration */}
-                {/* <svg>
-
-                   
-                    {
-                        currentFloor.vedio3D.map((e) => (
-                            <a
-                                key={e.id}
-                                href={e.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-
-
-                            >
-                                <polygon
-                                    // key={e.id} 
-                                    points={e.polygonPoints}
-                                    style={{ cursor: "pointer" }}
-                                    fill="transparent"
-                                />
-                            </a>
-                        ))
-                    }
-
-                </svg> */}
                 <svg
                     viewBox={currentFloor.imageSettings.svgSize}
                     className="w-full h-auto"
                     preserveAspectRatio="xMidYMid meet"
 
-                    style={{ cursor: "pointer" }}
+
+
                 >
+                    {/* Background image */}
                     <image
                         href={currentFloor.image}
                         width={currentFloor.imageSettings.imageWidth}
@@ -106,67 +84,94 @@ export default function MasterPlanPage() {
                     />
 
 
-                    {currentFloor.units.map((unit) => (
-                        <Tooltip
-                            key={unit.id}
-                            title={unit.name}
-                            arrow
-                            placement="top"
-                            componentsProps={{
-                                tooltip: {
-                                    sx: {
-                                        bgcolor: "#ff7043",   // 🔶 orange background
-                                        color: "white",       // tooltip text color
-                                        fontSize: "0.85rem",
-                                        padding: "5px 8px",
+                    {/* 🏠 Units polygons */}
+                    <g>
+                        {currentFloor.units.map((unit) => (
+                            <Tooltip
+                                key={unit.id}
+                                title={unit.name}
+                                arrow
+                                placement="top"
+                                componentsProps={{
+                                    tooltip: {
+                                        sx: {
+                                            bgcolor: "#ff7043",
+                                            color: "white",
+                                            fontSize: "0.85rem",
+                                            padding: "5px 8px",
+                                        },
                                     },
-                                },
-                                arrow: {
-                                    sx: {
-                                        color: "#ff7043",     // 🔶 arrow color same as tooltip
-                                    },
-                                },
-                            }}
-                        >
+                                    arrow: { sx: { color: "#ff7043" } },
+                                }}
+                            >
+                                <polygon
+                                    transform="translate(0, 155)"
+                                    points={unit.polygonPoints}
+                                    fill={
+                                        selectedFloor === unit.id
+                                            ? "rgba(255,112,67,0.5)"
+                                            : hoveredFloor === unit.id
+                                                ? unit.hoveredColor
+                                                : "transparent"
+                                    }
+                                    strokeWidth={2}
+                                    style={{ cursor: "grabbing", pointerEvents: "auto" }}
+                                    onMouseEnter={() => setHoveredFloor(unit.id)}
+                                    onMouseLeave={() => setHoveredFloor(null)}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedFloor(unit.id);
+                                    }}
+                                />
+                            </Tooltip>
+                        ))}
+                    </g>
 
 
+                    {/* 🔗 vedio3D links */}
+                    <g>
+                        {currentFloor.vedio3D.map((e) => (
                             <polygon
-                                transform="translate(0, 155)"
-                                points={unit.polygonPoints}
-                                fill={
-                                    selectedFloor === unit.id
-                                        ? "rgba(255,112,67,0.5)"
-                                        : hoveredFloor === unit.id
-                                            ? unit.hoveredColor
-                                            : "transparent"
-                                }
-                                strokeWidth={2}
-                                // pointerEvents={selectedFloor === unit.id || hoveredFloor === unit.id ? "auto" : "none"}
-                                style={{ cursor: 'grabbing' }}
-                                onMouseEnter={() => setHoveredFloor(unit.id)}
-                                onMouseLeave={() => setHoveredFloor(null)}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setSelectedFloor(unit.id);
 
+                                key={e.id}
+                                points={e.polygonPoints}
+                                // fill="transparent"
+                               
+                                // fillOpacity={0}     // invisible but still clickable
+                                transform="translate(0, 155)"
+                                fill={
+                                    selectedFloor === e.id ? "rgba(255,112,67,0.5)" : hoveredLink === e.id ? "rgba(255,140,0,0.5)" : "transparent"
+                                }
+                                onMouseEnter={() => setHoveredLink(e.id)}
+                                onMouseLeave={() => setHoveredLink(null)}
+
+                                pointerEvents="auto"          // ensure it receives pointer events
+                                tabIndex={0}                  // makes it keyboard-focusable
+                                role="link"                   // accessibility
+                                style={{ cursor: "pointer",outline:"none" }}
+                                onClick={(evt) => {
+                                    evt.stopPropagation();                  // prevent parent handlers
+                                    window.open(e.link, "_blank", "noopener,noreferrer");
+                                }}
+                                onKeyDown={(evt) => {
+                                    if (evt.key === "Enter" || evt.key === " ") {
+                                        window.open(e.link, "_blank", "noopener,noreferrer");
+                                    }
                                 }}
                             />
-                        </Tooltip>
-                    ))}
+                        ))}
+                    </g>
                 </svg>
 
                 {/* Swipe icon overlay */}
                 <div
-
                     className="absolute bottom-10 right-4 flex items-center justify-center text-white bg-black/50 p-8 rounded-full cursor-pointer"
                     onClick={handleImageClick}
                 >
-
                     <MdOutlineSwipeDown size={28} />
                 </div>
-
-
             </div>
+
 
             {/* Zoom Modal */}
             <Modal open={zoomOpen} onClose={() => setZoomOpen(false)}>
