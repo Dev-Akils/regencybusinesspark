@@ -61,7 +61,6 @@ export default function HomePage() {
           </div>
         </TransformComponent>
       </TransformWrapper>
-
     </section>
 
   );

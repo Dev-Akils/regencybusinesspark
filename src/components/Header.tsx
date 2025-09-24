@@ -75,7 +75,6 @@ export default function Header() {
 
 
 
-
             {/* Buildings */}
             <li className="relative group">
               <a
@@ -209,7 +208,6 @@ export default function Header() {
                   </ul>
                 )} */}
               </li>
-
 
 
               {/* Towers submenu */}
