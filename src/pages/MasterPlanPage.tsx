@@ -62,7 +62,8 @@ export default function MasterPlanPage() {
                         "&:hover": { borderColor: "#d4a373", color: "#d4a373" },
                     }}
                 >
-                    Explore Buildings
+                    {/* Explore Buildings */}
+                    CIRCULATION
                 </Button>
             </div>
 
