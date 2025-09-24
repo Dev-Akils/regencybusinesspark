@@ -24,7 +24,7 @@ export default function HomePage() {
               className="w-full h-full object-contain aspect-[3000/1700]"
             />
 
-            <div className="absolute bottom-32 right-10 pointer-events-none">
+            <div className="absolute bottom-40 right-10 pointer-events-none">
               <div className="flex flex-col items-center bg-black/60 w-24 h-24 text-center justify-center rounded-full text-white opacity-80 zoom-bounce">
                 <span className="text-3xl"><MdPinch /></span>
                 <p className="text-sm mt-2">Pinch to zoom</p>
