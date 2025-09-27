@@ -5,7 +5,10 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import masterVideo from "../assets/MasterPlan/Masterplan 1.mp4";
 import { masterPlan } from "../data/MasterPlan_Data";
+import { useNavigate } from "react-router-dom";
+
 export default function MasterPlanPage() {
+    const navigate=useNavigate();
     const [zoomOpen, setZoomOpen] = useState(false);
     const [selectedFloor, setSelectedFloor] = useState<number | null>(null);
     const [hoveredFloor, setHoveredFloor] = useState<number | null>(null);
@@ -150,15 +153,16 @@ export default function MasterPlanPage() {
                                 tabIndex={0}                  // makes it keyboard-focusable
                                 role="link"                   // accessibility
                                 style={{ cursor: "pointer",outline:"none" }}
-                                onClick={(evt) => {
-                                    evt.stopPropagation();                  // prevent parent handlers
-                                    window.open(e.link, "_blank", "noopener,noreferrer");
-                                }}
-                                onKeyDown={(evt) => {
-                                    if (evt.key === "Enter" || evt.key === " ") {
-                                        window.open(e.link, "_blank", "noopener,noreferrer");
-                                    }
-                                }}
+                                // onClick={(evt) => {
+                                //     evt.stopPropagation();                  // prevent parent handlers
+                                //     window.open(e.link, "_blank", "noopener,noreferrer");
+                                // }}
+                                // onKeyDown={(evt) => {
+                                //     if (evt.key === "Enter" || evt.key === " ") {
+                                //         window.open(e.link, "_blank", "noopener,noreferrer");
+                                //     }
+                                // }}
+                                 onClick={()=>navigate(`/explore360deg/${currentFloor.id}-${e.id}`)}
                             />
                         ))}
                     </g>
